@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Echoes of You - Listener Reflection Form</title>
+    <link rel="stylesheet" href="form.css">
+     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <header id="page-top" class="header">
+      <h1 id="title">Echoes of You</h1>
+      <p id="description">A reflection form for those who feel the inner void pulling them down</p>
+    </header>
+    
+    <form id="survey-form">
+      <label id="name-label" for="name">What's your name?</label>
+      <input type="text" autocomplete="name" id="name" name="name" placeholder="John Doe" required aria-required="true">
+
+      <label id="email-label" for="email">What's your email?</label>
+      <input type="email" id="email" name="email" placeholder="lost@gmail.com" required aria-required="true">
+
+      <label for="resonance">Which track felt like it resonated the most with you?</label>
+      <select id="resonance" name="most-resonant-track">
+        <option value="track-1">Track 1</option>
+        <option value="track-2">Track 2</option>
+        <option value="track-3">Track 3</option>
+        <option value="track-4">Track 4</option>
+        <option value="track-5">Track 5</option>
+        <option value="track-6">Track 6</option>
+        <option value="track-7">Track 7</option>
+      </select>
+
+
+      <label for="feeling">What inner feeling was dominant whilst listening to the track?</label>
+      <select id="feeling" name="dominant-feeling">
+        <option value="hopelessness">Hopelessness</option>
+        <option value="grief">Grief</option>
+        <option value="loneliness">Loneliness</option>
+        <option value="desperation">Desperation</option>
+        <option value="clarity">Clarity</option>
+        <option value="growth">Growth</option>
+      </select>
+
+      <label id="number-label" for="number">On a scale of 1-10, how loud did you play the track?</label>
+      <input type="number" id="number" name="volume-level" min="1" max="10" placeholder="7">
+
+      <!-- paragraph element for screen readers only -->
+      <p id="disconnect-desc" class="visually-hidden">
+        This question explores emotional disconnection. 
+        Sharing your experience helps deepen the EP's themes and human resonance.
+      </p>
+
+      <label for="disconnect">Have you ever felt disconnected from who you really are?</label>
+      <textarea
+        id="disconnect"
+        name="user-disconnection"
+        rows="4"
+        aria-describedby="disconnect-desc"
+        placeholder="It is not too late to (re)create yourself. Tell me your experience with inner disconnection"></textarea>
+      
+      <fieldset>
+        <legend class="visually-hidden" id="gig-attendance-desc">Live show attendance</legend>
+        <h2 aria-labelledby="gig-attendance-desc">Would you come see me play my EP live?</h2>
+        <div role="radiogroup" aria-labelledby="attendance-options">
+          <div class="form-option">
+            <input type="radio" name="gig-attendance" id="yes" value="yes">
+            <label for="yes">Yes</label>
+          </div>
+          <div class="form-option">
+            <input type="radio" name="gig-attendance" id="no" value="no">
+            <label for="no">No</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend class="visually-hidden" id="gig-city-desc">Gig city preference</legend>
+        <h2 aria-labelledby="gig-city-desc">Which cities do you go to for gigs?</h2>
+        <div class="form-option">
+          <label for="liverpool">Liverpool</label>
+          <input type="checkbox" id="liverpool" name="cities" value="liverpool">
+        </div>
+        <div class="form-option">
+          <label for="manchester">Manchester</label>
+          <input type="checkbox" id="manchester" name="cities" value="manchester"> 
+        </div>
+        <div class="form-option">
+          <label for="leeds">Leeds</label>
+          <input type="checkbox" id="leeds" name="cities" value="leeds">
+        </div>
+        <div class="form-option">
+          <label for="birmingham">Birmingham</label>
+          <input type="checkbox" id="birmingham" name="cities" value="birmingham">
+        </div>
+        <div class="form-option">
+          <label for="bristol">Bristol</label>
+          <input type="checkbox" id="bristol" name="cities" value="bristol">
+        </div>
+        <div class="form-option">
+          <label for="london">London</label>
+          <input type="checkbox" id="london" name="cities" value="london">          
+        </div>
+        <div class="form-option">
+          <label for="other">Other:</label>
+          <p id="other-city-desc" class="visually-hidden">Please specify other city</p>
+          <input type="text" id="other" name="cities" placeholder="Please specify other city" aria-labelledby="other-city-desc">
+        </div>
+      </fieldset>
+
+      <button type="submit" id="submit">Send Reflection</button>
+    </form>
+
+    <div id="confirmation-message" class="hidden" role="alert" aria-live="assertive">
+      <p>Your reflection has been received.<br>Echoes of you are now part of something greater.</p>
+    </div>
+
+    <script src="form.js"></script>
+
+  </body>
+</html>
