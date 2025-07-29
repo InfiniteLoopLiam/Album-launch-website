@@ -31,6 +31,28 @@ header {
   animation: fadeIn 2s ease-in forwards;
 }
 
+.greeting-header {
+  display: block;
+  margin: 20px auto 0;
+  font-size: 3rem;
+
+}
+
+.forward {
+  animation: flicker 0.3s steps(1) infinite;
+}
+
+.reverse {
+  animation: flicker 0.3s steps(1) infinite reverse;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: none; }
+  25% { opacity: 0.5; transform: translate(-1px, 1px) skew(5deg); }
+  50% { opacity: 0.1; transform: translate(1px, -1px) skew(-5deg); }
+}
+
+
 /* Track gallery styles start */
 
 .gallery {
@@ -186,14 +208,25 @@ input[type="checkbox"]:hover {
   transition: all 0.5s ease;
 }
 
-button {
-  display: block;
+#submit, #startScan {
   height: 3em;
   font-size: 1.1rem;
   min-width: 20%;
   margin: 10px 0;
   padding: 0 10px;
   border-radius: 5px;
+  border: none;
+  color: #f5f6f7;
+  background-color: #111111B1;
+  box-shadow: 0px 0px 8px 2px #0e1b23;
+  font-weight: bold;
+}
+
+#safeModeToggle {
+  font-size: 0.5rem;
+  margin: 10px 10px;
+  padding: 10px 10px;
+  border-radius: 50px;
   border: none;
   color: #f5f6f7;
   background-color: #111111B1;
