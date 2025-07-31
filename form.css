@@ -2,13 +2,12 @@
   box-sizing: border-box;
 }
 
+
 body {
+  background-color: #0f0f0f;
   margin: 0;
-  background-image: url(https://images.squarespace-cdn.com/content/v1/5a2eca820100276b66a6484d/1660326114602-YBWB90LDG2F2TRK37NSX/Copy+of+NJ22_7.jpg);
-  background-size: cover;
-  background-attachment: fixed;
   color: #f5f6f7;
-  font-family: 'Oswald', Impact, sans-serif;
+  font-family: 'VT323', 'Oswald', Impact, sans-serif;
   font-size: 16px;
 }
 
@@ -301,4 +300,15 @@ button:hover {
 @keyframes floatUp {
   0% { transform: translateY(50px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }
+}
+
+#vhsCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  mix-blend-mode: difference; /* Optional: eerie inversion */
 }

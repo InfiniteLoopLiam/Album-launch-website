@@ -88,3 +88,62 @@ document.querySelectorAll('.track-card').forEach(card => {
   });
 });
 
+// VHS overlay
+
+// Create instance of 2d object
+
+const canvas = document.getElementById('vhsCanvas');
+const ctx = canvas.getContext('2d');
+
+// Resize canvas to fill screen
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+window.addEventListener('load', resizeCanvas);
+window.addEventListener('resize', resizeCanvas);
+
+// Draw one frame of VHS distortion
+function drawFrame() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  drawStatic();
+  drawScanlines();
+  drawGlitchBar();
+
+  requestAnimationFrame(drawFrame);
+}
+
+// Static noise specks
+function drawStatic() {
+  const noiseCount = canvas.width * canvas.height * 0.002;
+  for (let pixel = 0; pixel < noiseCount; pixel++) {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+    const shade = Math.floor(Math.random() * 255);
+    ctx.fillStyle = `rgba(${shade},${shade},${shade},0.4)`;
+    ctx.fillRect(x, y, 1, 1);
+  }
+}
+
+// Horizontal scanlines
+function drawScanlines() {
+  ctx.fillStyle = 'rgba(150, 4, 4, 0.05)';
+  for (let y = 0; y < canvas.height; y += 2) {
+    ctx.fillRect(0, y, canvas.width, 1);
+  }
+}
+
+// Occasional glitch bar
+function drawGlitchBar() {
+  if (Math.random() < 0.1) {
+    const height = 20 + Math.random() * 30;
+    const y = Math.random() * (canvas.height - height);
+    ctx.fillStyle = 'rgba(255,255,255,0.05)';
+    ctx.fillRect(0, y, canvas.width, height);
+  }
+}
+
+// Start the animation loop
+drawFrame();
