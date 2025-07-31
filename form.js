@@ -22,14 +22,11 @@ function isSafeModeOn() {
   return localStorage.getItem('safeMode') === 'true';
 }
 
-console.log(isSafeModeOn());
-
 safeModeBtn.addEventListener('click', () => {
   const currentMode = isSafeModeOn();
   const toggledMode = !currentMode;
   localStorage.setItem('safeMode', toggledMode.toString());
   updateButtonLabel();
-  console.log(`Safe Mode is now: ${toggledMode}`)
 })
 
 function updateButtonLabel() {
@@ -95,10 +92,16 @@ document.querySelectorAll('.track-card').forEach(card => {
 const canvas = document.getElementById('vhsCanvas');
 const ctx = canvas.getContext('2d');
 
+let displacementMap = [];
+
 // Resize canvas to fill screen
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+
+  const sliceHeight = 10;
+  const numSlices = Math.ceil(canvas.height / sliceHeight);
+  displacementMap = new Array(numSlices).fill(0);
 }
 
 window.addEventListener('load', resizeCanvas);
@@ -111,7 +114,7 @@ function drawFrame() {
   drawStatic();
   drawScanlines();
   drawGlitchBar();
-
+  drawTears();
   requestAnimationFrame(drawFrame);
 }
 
@@ -147,3 +150,59 @@ function drawGlitchBar() {
 
 // Start the animation loop
 drawFrame();
+
+
+// Scroll tracking and scroll velocity logic
+let lastScrollY = window.scrollY;
+let lastRecdTime = performance.now();
+let velocity;
+
+function scrollTrack() {
+  const currentScrollY = window.scrollY;
+  const currentTime = performance.now();
+  const deltaY = currentScrollY - lastScrollY;
+  lastScrollY = currentScrollY;
+  const deltaTime = currentTime - lastRecdTime;
+  lastRecdTime = currentTime;
+  velocity = deltaY / deltaTime;
+
+  horizontalTear();
+
+  requestAnimationFrame(scrollTrack);
+}
+
+scrollTrack();
+
+// Horizontal tearing based on velocity of scroll
+
+function horizontalTear() {
+  if (Math.abs(velocity) > 5) {
+    for (let i = 0; i < displacementMap.length; i++) {
+      const randomFactor = (Math.random() - 0.5) * 2; // -1 to 1
+      const intensity = velocity * randomFactor;
+      displacementMap[i] += intensity;
+    }
+  } else {
+    // Decay toward zero when velocity is low
+    for (let i = 0; i < displacementMap.length; i++) {
+      if (Math.abs(displacementMap[i]) < 0.01) {
+        displacementMap[i] = 0;
+      } else {
+        displacementMap[i] *= 0.9;
+      }
+    }
+  }
+}
+
+function drawTears() {
+  const sliceHeight = 10;
+  for (let i = 0; i < displacementMap.length; i++) {
+    const displacement = displacementMap[i];
+    if (Math.abs(displacement) > 0.5) {
+      const dy = i * sliceHeight + displacement;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+      ctx.fillRect(0, dy, canvas.width, sliceHeight);
+    }
+  }
+}
+
