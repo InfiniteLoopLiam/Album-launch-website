@@ -8,7 +8,7 @@ const reflectionForm = document.getElementById('reflection-form');
 const glitchHeading = document.getElementById('glitchHeading');
 const safeModeBtn = document.getElementById('safeModeToggle');
 
-// logic for disabling animations start
+// logic for enabling/disabling animations start
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
@@ -55,7 +55,7 @@ setInterval(() => {
   }
 }, 1000 + Math.random() * 1500);
 
-// logic for disabling animations end
+// logic for enabling/disabling animations end
 
 startScanBtn.addEventListener('click', () => {
   landing.classList.add('hidden');
