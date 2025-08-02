@@ -23,11 +23,12 @@ window.addEventListener('resize', resizeCanvas);
 // Draw one frame of VHS distortion
 function drawFrame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  drawStatic();
-  drawScanlines();
-  drawGlitchBar();
-  drawTears();
+  if (!isSafeModeOn()) {
+    drawStatic();
+    drawScanlines();
+    drawGlitchBar();
+    drawTears();
+  }
   requestAnimationFrame(drawFrame);
 }
 
