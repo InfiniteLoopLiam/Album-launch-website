@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Echoes of You</title>
-    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
     <canvas id="vhsCanvas"></canvas>
     <main>
       <section id="landing" class="greeting">
-        <h1 id="glitchHeading" class="greeting-header">Echoes Detected</h1>
+        <h1 id="glitchHeading" class="greeting-header" data-text="Echoes Detected">Echoes Detected</h1>
         <p class="blip">Awaiting signal transmission</p>
         <button id="startScan">Initiate Scan</button>
       </section>
@@ -181,6 +181,7 @@
       <button id="safeModeToggle" aria-label="Toggle Safe Mode to reduce motion"></button>
       <script src="vhsOverlay.js"></script>
       <script src="main.js"></script>
+      <script src="glitch.js"></script>
     </main>
   </body>
 </html>

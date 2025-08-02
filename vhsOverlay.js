@@ -12,7 +12,7 @@ function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  const sliceHeight = 10;
+  const sliceHeight = 20;
   const numSlices = Math.ceil(canvas.height / sliceHeight);
   displacementMap = new Array(numSlices).fill(0);
 }
@@ -61,11 +61,9 @@ function drawGlitchBar() {
   }
 }
 
-// Start the animation loop
-drawFrame();
-
-
 // Scroll tracking and scroll velocity logic
+
+// Initialises first instance of scroll position, first time stamp in ms and velocity
 let lastScrollY = window.scrollY;
 let lastRecdTime = performance.now();
 let velocity;
@@ -79,7 +77,7 @@ function scrollTrack() {
   lastRecdTime = currentTime;
   velocity = deltaY / deltaTime;
 
-  horizontalTear();
+  calcSliceDisplacement();
 
   requestAnimationFrame(scrollTrack);
 }
@@ -88,12 +86,12 @@ scrollTrack();
 
 // Horizontal tearing based on velocity of scroll
 
-function horizontalTear() {
-  if (Math.abs(velocity) > 4) {
-    for (let i = 0; i < displacementMap.length; i++) {
+function calcSliceDisplacement() {
+  if (Math.abs(velocity) > 3) {
+    for (let sliceIndex = 0; sliceIndex < displacementMap.length; sliceIndex++) {
       const randomFactor = (Math.random() - 0.5) * 2; // -1 to 1
       const intensity = velocity * randomFactor;
-      displacementMap[i] += intensity;
+      displacementMap[sliceIndex] += intensity;
     }
   } else {
     // Decay toward zero when velocity is low
@@ -101,20 +99,34 @@ function horizontalTear() {
       if (Math.abs(displacementMap[i]) < 0.01) {
         displacementMap[i] = 0;
       } else {
-        displacementMap[i] *= 0.9;
+        displacementMap[i] *= 0.8;
       }
     }
   }
 }
 
 function drawTears() {
-  const sliceHeight = 10;
-  for (let i = 0; i < displacementMap.length; i++) {
-    const displacement = displacementMap[i];
-    if (Math.abs(displacement) > 0.5) {
-      const dy = i * sliceHeight + displacement;
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+  const sliceHeight = 20;
+  const velocityMagnitude = Math.abs(velocity);
+  const threshold = Math.min(1, velocityMagnitude * 0.5 + 0.2);
+  const opacity = Math.min(0.5, velocityMagnitude * 0.3);
+
+
+  for (let sliceIndex = 0; sliceIndex < displacementMap.length; sliceIndex++) {
+    const displacement = displacementMap[sliceIndex];
+
+    if (Math.abs(displacement) > threshold) {
+      const dy = sliceIndex * sliceHeight + displacement;
+
+      const red = Math.max(0, displacement * 10);
+      const blue = Math.max(0, -displacement * 10);
+      const green = 20;
+      
+      ctx.fillStyle = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
       ctx.fillRect(0, dy, canvas.width, sliceHeight);
     }
   }
 }
+
+// Start the animation loop
+drawFrame();

@@ -2,11 +2,10 @@
   box-sizing: border-box;
 }
 
-
 body {
   background-color: #0f0f0f;
   margin: 0;
-  color: #f5f6f7;
+  color: #f5f6f7d4;
   font-family: 'VT323', 'Oswald', Impact, sans-serif;
   font-size: 16px;
 }
@@ -31,10 +30,10 @@ header {
 }
 
 .greeting-header {
+  position: relative;
   display: block;
   margin: 20px auto 0;
-  font-size: 3rem;
-
+  font-size: 3rem; 
 }
 
 .forward {
@@ -43,6 +42,17 @@ header {
 
 .reverse {
   animation: flicker 0.3s steps(1) infinite reverse;
+}
+
+.greeting-header::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  color: rgba(255, 255, 255, 0.2);
+  transform: translate(var(--glitch-x, 2px), var(--glitch-y, 2px));
+  filter: blur(1px);
+  white-space: nowrap;
 }
 
 @keyframes flicker {
