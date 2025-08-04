@@ -2,6 +2,9 @@
 
 const glitchHeading = document.getElementById('glitchHeading');
 const safeModeBtn = document.getElementById('safeModeToggle');
+const glitchRed = document.getElementById('glitchRed');
+const glitchBlue = document.getElementById('glitchBlue');
+const glitchPink = document.getElementById('glitchPink');
 
 // logic for enabling/disabling animations start
 
@@ -62,5 +65,35 @@ setInterval(() => {
   if (isSafeModeOn()) return;
   randomGlitch()
 }, 90);
+
+
+// review function below at later date
+
+// function tapeDrag(red, blue, pink) {
+//   if (red) {
+//     const xRed = Math.floor(Math.random() * 4 - 3); 
+//     const yRed = Math.floor(Math.random() * 2);
+//     glitchRed.style.setProperty('--drag-x-red', `${xRed}px`);
+//     glitchRed.style.setProperty('--drag-y-red', `${yRed}px`);
+//   }
+//   if (blue) {
+//     const xBlue = Math.floor(Math.random() * 4 - 3); 
+//     const yBlue = Math.floor(Math.random() * 2);
+//     glitchBlue.style.setProperty('--drag-x-blue', `${xBlue}px`);
+//     glitchBlue.style.setProperty('--drag-y-blue', `${yBlue}px`);
+//   }
+//   if (pink) {
+//     const xpink = Math.floor(Math.random() * 4 - 3); 
+//     const ypink = Math.floor(Math.random() * 2);
+//     glitchPink.style.setProperty('--drag-x-pink', `${xpink}px`);
+//     glitchPink.style.setProperty('--drag-y-pink', `${ypink}px`);
+//   }
+
+// }
+
+// setInterval(() => {
+//   if (isSafeModeOn()) return;
+//   tapeDrag(true, true, true)
+// }, 40);
 
 // logic for enabling/disabling animations end

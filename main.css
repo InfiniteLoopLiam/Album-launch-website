@@ -5,7 +5,7 @@
 body {
   background-color: #0f0f0f;
   margin: 0;
-  color: #f5f6f7d4;
+  color: #aaababf7;
   font-family: 'VT323', 'Oswald', Impact, sans-serif;
   font-size: 16px;
 }
@@ -30,11 +30,10 @@ header {
 }
 
 .greeting-header {
+  text-align: center;
   position: relative;
-  display: block;
-  margin: 20px auto 0;
   font-size: 3rem; 
-}
+} 
 
 .forward {
   animation: flicker 0.3s steps(1) infinite;
@@ -44,15 +43,47 @@ header {
   animation: flicker 0.3s steps(1) infinite reverse;
 }
 
+#glitchRed {
+  position: absolute;
+  left: -5px;
+  transform: translate(var(--drag-x-red), var(--drag-y-red));
+  color: rgba(255, 0, 0, 0.5);
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+#glitchPink {
+  position: absolute;
+  left: -7px;
+  transform: translate(var(--drag-x-pink), var(--drag-y-pink));
+  color: rgba(255, 100, 232, 0.6);
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+#glitchBlue {
+  position: absolute;
+  left: -2.5px;
+  transform: translate(var(--drag-x-blue),var(--drag-y-blue));
+  color: rgba(0, 0, 255, 0.4);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.greeting-header::first-letter {
+  color: rgba(190, 202, 190, 0.74);
+  
+}
+
 .greeting-header::after {
   content: attr(data-text);
+  width: 100%;
   position: absolute;
   top: 0px;
   left: 10px;
   color: rgba(255, 255, 255, 0.2);
   transform: translate(var(--glitch-x, 2px), var(--glitch-y, 2px));
   filter: blur(1px);
-  white-space: nowrap;
 }
 
 @keyframes flicker {
