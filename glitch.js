@@ -66,6 +66,48 @@ setInterval(() => {
   randomGlitch()
 }, 90);
 
+// section for infected and mutated text
+
+let originalHeader = glitchHeading.innerText.split("");
+
+let infectedChars = originalHeader.map(char => ({
+  original: char,
+  current: char,
+  state: "healthy"
+}));
+
+
+function infect(index) {
+  if (index < 0 || index >= infectedChars.length) return;
+
+  const char = infectedChars[index];
+  if (char.state === "healthy") {
+    char.state = "infected";
+    char.current = mutateChar();
+    renderInfectedText();
+    
+  }
+}
+
+function mutateChar() {
+  const glitchChars = ['█', '▓', '▒', '░', '#', '%', '&', '@', 'ø', '∆', '§'];
+  return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+}
+
+function renderInfectedText() {
+  const infectedText = infectedChars.map(char => char.current).join('');
+  glitchHeading.textContent = infectedText;
+}
+
+function infectRandomly() {
+  const index = Math.floor(Math.random() * infectedChars.length);
+  infect(index);
+
+  const nextDelay = Math.floor(Math.random() * 3000);
+  setTimeout(infectRandomly, nextDelay);
+}
+
+setTimeout(infectRandomly, 5000);
 
 // review function below at later date
 
