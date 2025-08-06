@@ -5,10 +5,9 @@ const safeModeBtn = document.getElementById('safeModeToggle');
 const glitchRed = document.getElementById('glitchRed');
 const glitchBlue = document.getElementById('glitchBlue');
 const glitchPink = document.getElementById('glitchPink');
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 // logic for enabling/disabling animations start
-
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 if (localStorage.getItem("safeMode") === null) {
   localStorage.setItem("safeMode", prefersReducedMotion.toString());
@@ -68,9 +67,9 @@ setInterval(() => {
 
 // section for infected and mutated text
 
-let originalHeader = glitchHeading.innerText.split("");
+const originalHeader = glitchHeading.innerText.split("");
 
-let infectedChars = originalHeader.map(char => ({
+const infectedChars = originalHeader.map(char => ({
   original: char,
   current: char,
   state: "healthy"
@@ -85,7 +84,6 @@ function infect(index) {
     char.state = "infected";
     char.current = mutateChar();
     renderInfectedText();
-    
   }
 }
 
@@ -95,14 +93,16 @@ function mutateChar() {
 }
 
 function renderInfectedText() {
-  const infectedText = infectedChars.map(char => char.current).join('');
-  glitchHeading.textContent = infectedText;
+  const infectedHTML = infectedChars.map(char => {
+    return `<span class="glitch-char ${char.state}">${char.current}</span>`;
+  }).join('');
+  glitchHeading.innerHTML = infectedHTML;
 }
+
 
 function infectRandomly() {
   const index = Math.floor(Math.random() * infectedChars.length);
   infect(index);
-
   const nextDelay = Math.floor(Math.random() * 3000);
   setTimeout(infectRandomly, nextDelay);
 }

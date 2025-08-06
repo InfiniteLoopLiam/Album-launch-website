@@ -43,7 +43,7 @@ header {
   animation: flicker 0.3s steps(1) infinite reverse;
 }
 
-#glitchRed {
+/* #glitchRed {
   position: absolute;
   left: -5px;
   transform: translate(var(--drag-x-red), var(--drag-y-red));
@@ -68,12 +68,12 @@ header {
   color: rgba(0, 0, 255, 0.4);
   filter: blur(2px);
   pointer-events: none;
-}
+} */
 
-.greeting-header::first-letter {
+/* .greeting-header::first-letter {
   color: rgba(190, 202, 190, 0.74);
   
-}
+} */
 
 .greeting-header::after {
   content: attr(data-text);
@@ -84,6 +84,11 @@ header {
   color: rgba(255, 255, 255, 0.2);
   transform: translate(var(--glitch-x, 2px), var(--glitch-y, 2px));
   filter: blur(1px);
+}
+
+.greeting-statement {
+  text-shadow: rgba(255, 0, 0, 0.8) 0 0 5px,
+               rgba(0, 0, 255, 0.8) 0 0 10px;
 }
 
 @keyframes flicker {
