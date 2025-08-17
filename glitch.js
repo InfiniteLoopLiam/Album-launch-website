@@ -97,8 +97,7 @@ function renderInfectedText() {
     return `<span class="glitch-char ${char.state}">${char.current}</span>`;
   }).join('');
   glitchHeading.innerHTML = infectedHTML;
-}
-
+} 
 
 function infectRandomly() {
   const index = Math.floor(Math.random() * infectedChars.length);

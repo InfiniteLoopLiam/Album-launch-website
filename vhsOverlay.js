@@ -69,7 +69,7 @@ let lastScrollY = window.scrollY;
 let lastRecdTime = performance.now();
 let velocity;
 
-function scrollTrack() {
+function calcVelocity() {
   const currentScrollY = window.scrollY;
   const currentTime = performance.now();
   const deltaY = currentScrollY - lastScrollY;
@@ -77,9 +77,11 @@ function scrollTrack() {
   const deltaTime = currentTime - lastRecdTime;
   lastRecdTime = currentTime;
   velocity = deltaY / deltaTime;
+}
 
+function scrollTrack() {
+  calcVelocity();
   calcSliceDisplacement();
-
   requestAnimationFrame(scrollTrack);
 }
 
@@ -87,44 +89,61 @@ scrollTrack();
 
 // Horizontal tearing based on velocity of scroll
 
-function calcSliceDisplacement() {
-  if (Math.abs(velocity) > 3) {
-    for (let sliceIndex = 0; sliceIndex < displacementMap.length; sliceIndex++) {
+function applyDisplacement(displacementMap, velocity) {
+  for (let sliceIndex = 0; sliceIndex < displacementMap.length; sliceIndex++) {
       const randomFactor = (Math.random() - 0.5) * 2; // -1 to 1
       const intensity = velocity * randomFactor;
       displacementMap[sliceIndex] += intensity;
     }
-  } else {
-    // Decay toward zero when velocity is low
-    for (let i = 0; i < displacementMap.length; i++) {
-      if (Math.abs(displacementMap[i]) < 0.01) {
-        displacementMap[i] = 0;
-      } else {
-        displacementMap[i] *= 0.8;
-      }
+}
+
+function decayDisplacement(displacementMap) {
+  // Decay toward zero when velocity is low
+  for (let i = 0; i < displacementMap.length; i++) {
+    if (Math.abs(displacementMap[i]) < 0.01) {
+      displacementMap[i] = 0;
+    } else {
+      displacementMap[i] *= 0.8;
     }
   }
+}
+function calcSliceDisplacement() {
+  if (Math.abs(velocity) > 3) {
+    applyDisplacement(displacementMap, velocity);
+  } else {
+    decayDisplacement(displacementMap)
+  }
+}
+
+function getTearIntensity(velocity) {
+  const velocityMagnitude = Math.abs(velocity);
+  const threshold = Math.min(1, velocityMagnitude * 0.5 + 0.2);
+  const opacity = Math.min(0.5, velocityMagnitude * 0.3);
+  return {
+    threshold,
+    opacity
+  }  
+}
+
+function getTearColour(displacement) {
+  const red = Math.max(0, displacement * 10);
+  const blue = Math.max(0, -displacement * 10);
+  const green = 20;
+  return { red, green, blue };    
 }
 
 function drawTears() {
   const sliceHeight = 20;
-  const velocityMagnitude = Math.abs(velocity);
-  const threshold = Math.min(1, velocityMagnitude * 0.5 + 0.2);
-  const opacity = Math.min(0.5, velocityMagnitude * 0.3);
-
-
+  
   for (let sliceIndex = 0; sliceIndex < displacementMap.length; sliceIndex++) {
     const displacement = displacementMap[sliceIndex];
+    const { threshold, opacity } = getTearIntensity(velocity);
+    const { red, green, blue } = getTearColour(displacement);
 
-    if (Math.abs(displacement) > threshold) {
-      const dy = sliceIndex * sliceHeight + displacement;
-
-      const red = Math.max(0, displacement * 10);
-      const blue = Math.max(0, -displacement * 10);
-      const green = 20;
-      
-      ctx.fillStyle = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
-      ctx.fillRect(0, dy, canvas.width, sliceHeight);
+  if (Math.abs(displacement) > threshold) {
+    const dy = sliceIndex * sliceHeight + displacement;  
+    ctx.fillStyle = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+    ctx.fillRect(0, dy, canvas.width, sliceHeight);
     }
   }
 }
