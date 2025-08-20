@@ -1,3 +1,7 @@
+import { initGlitch } from "./glitch.js";
+import { initVhsOverlay } from "./vhsOverlay.js";
+import { initSafeModeToggle } from "./utils.js";
+
 const form = document.getElementById('survey-form');
 const confirmation = document.getElementById('confirmation-message');
 const header = document.getElementById('page-top');
@@ -6,6 +10,11 @@ const startScanBtn = document.getElementById('startScan');
 const trackGallery = document.getElementById('track-gallery');
 const reflectionForm = document.getElementById('reflection-form');
 
+document.addEventListener('DOMContentLoaded', () => {
+  initSafeModeToggle();
+  initGlitch();
+  initVhsOverlay();
+});
 
 startScanBtn.addEventListener('click', () => {
   landing.classList.add('hidden');
@@ -34,3 +43,4 @@ document.querySelectorAll('.track-card').forEach(card => {
     }
   });
 });
+
