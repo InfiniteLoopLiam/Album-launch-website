@@ -51,7 +51,7 @@ function drawStatic(state) {
 // Horizontal scanlines
 function drawScanlines(state) {
   state.ctx.fillStyle = 'rgba(150, 4, 4, 0.05)';
-  for (let y = 0; y < canvas.height; y += 2) {
+  for (let y = 0; y < canvas.height; y += 4) {
     state.ctx.fillRect(0, y, canvas.width, 1);
   }
 }

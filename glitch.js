@@ -78,8 +78,8 @@ function mutateChar() {
 }
 
 function renderInfectedText() {
-  const infectedHTML = infectedChars.map(char => {
-    return `<span class="glitch-char ${char.state}">${char.current}</span>`;
+  const infectedHTML = infectedChars.map(newChar => {
+    return `<span class="glitch-char ${newChar.state}">${newChar.current}</span>`;
   }).join('');
   glitchHeading.innerHTML = infectedHTML;
 } 
