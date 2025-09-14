@@ -110,8 +110,8 @@ function decayDisplacement(displacementMap) {
       displacementMap[i] *= 0.8;
     }
   }
-
 }
+
 function drawTears(state) {
   for (let sliceIndex = 0; sliceIndex < state.displacementMap.length; sliceIndex++) {
     const displacement = state.displacementMap[sliceIndex];
