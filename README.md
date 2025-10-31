@@ -1,4 +1,4 @@
-# 💒 Album Launch Website
+# 🎙️ Album Launch Website
 
 ## Overview
 
