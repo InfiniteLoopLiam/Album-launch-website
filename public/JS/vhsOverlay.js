@@ -1,6 +1,6 @@
 // VHS overlay
 
-import { isSafeModeOn } from "./utils.js";
+import { isSafeModeOn } from "utils.js";
 
 // Create instance of 2d object
 

@@ -79,7 +79,7 @@ header {
   content: attr(data-text);
   width: 100%;
   position: absolute;
-  top: 0px;
+  top: 0;
   left: 10px;
   color: rgba(255, 255, 255, 0.2);
   transform: translate(var(--glitch-x, 2px), var(--glitch-y, 2px));
@@ -115,7 +115,7 @@ header {
   text-align: center;
   background-color: #111111B1;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px 2px #0e1b23;
+  box-shadow: 0 0 10px 2px #0e1b23;
   padding: 20px;
 }
 
@@ -127,7 +127,7 @@ header {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  box-shadow: 0px 0px 10px 2px #0e1b23;
+  box-shadow: 0 0 10px 2px #0e1b23;
   transition: all 1s ease;
 }
 
@@ -204,7 +204,7 @@ fieldset {
   border-radius: 2px;
   box-shadow: 0 0 8px #05090c;
   padding: 8px;
-  box-shadow: 0px 0px 8px 2px #0e1b23;
+  box-shadow: 0 0 8px 2px #0e1b23;
 }
 
 input:is([type="number"]) {
@@ -263,7 +263,7 @@ input[type="checkbox"]:hover {
   border: none;
   color: #f5f6f7;
   background-color: #111111B1;
-  box-shadow: 0px 0px 8px 2px #0e1b23;
+  box-shadow: 0 0 8px 2px #0e1b23;
   font-weight: bold;
 }
 
@@ -275,7 +275,7 @@ input[type="checkbox"]:hover {
   border: none;
   color: #f5f6f7;
   background-color: #111111B1;
-  box-shadow: 0px 0px 8px 2px #0e1b23;
+  box-shadow: 0 0 8px 2px #0e1b23;
   font-weight: bold;
   max-width: 60px;
 }
@@ -314,7 +314,7 @@ button:hover {
   padding: 20px;
   text-align: center;
   background-color: #111111B1;
-  box-shadow: 0px 0px 8px 2px #0e1b23;
+  box-shadow: 0 0 8px 2px #0e1b23;
   color: #f5f6f7;
   font-size: 1.2rem;
   animation: fadeIn 2s ease-in-out forwards;

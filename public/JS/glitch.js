@@ -1,6 +1,6 @@
 // awesome script of glitchy glitches
 
-import { isSafeModeOn } from "./utils.js";
+import { isSafeModeOn } from "utils.js";
 
 const glitchHeading = document.getElementById('glitchHeading');
 // const glitchRed = document.getElementById('glitchRed');
@@ -42,7 +42,7 @@ function applyFlickerEffect(direction) {
   setTimeout(() => glitchHeading.classList.remove(direction), 300);
 }
 
-// function calculates random x and y values and sets css variable as the result 
+// function calculates random x and y values and sets CSS variable as the result
 function randomGlitch() {
   const x = Math.floor(Math.random() * 6 - 3); // -3 to 3 px
   const y = Math.floor(Math.random() * 6 - 3);

@@ -1,6 +1,6 @@
-import { initGlitch } from "./glitch.js";
-import { initVhsOverlay } from "./vhsOverlay.js";
-import { initSafeModeToggle } from "./utils.js";
+import { initGlitch } from "glitch.js";
+import { initVhsOverlay } from "vhsOverlay.js";
+import { initSafeModeToggle } from "utils.js";
 
 const form = document.getElementById('survey-form');
 const confirmation = document.getElementById('confirmation-message');
