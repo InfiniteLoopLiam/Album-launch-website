@@ -1,16 +1,16 @@
 // VHS overlay
 
-import { isSafeModeOn } from "utils.js";
+import { isSafeModeOn } from './utils.js';
 
 // Create instance of 2d object
 
-const canvas = document.getElementById('vhsCanvas');
+const canvas = document.getElementById('vhs-canvas');
 const canvasState = {
   velocity: 0,
   displacementMap: [],
   sliceHeight: 20,
   ctx: canvas.getContext('2d'),
-  lastScrollY: window.scrollY
+  lastScrollY: window.scrollY,
 };
 
 // Resize canvas to fill screen
@@ -89,16 +89,16 @@ function calcSliceDisplacement(state) {
   if (Math.abs(state.velocity) > 3) {
     applyDisplacement(state.displacementMap, state.velocity);
   } else {
-    decayDisplacement(state.displacementMap)
+    decayDisplacement(state.displacementMap);
   }
 }
 
 function applyDisplacement(displacementMap, velocity) {
   for (let sliceIndex = 0; sliceIndex < displacementMap.length; sliceIndex++) {
-      const randomFactor = (Math.random() - 0.5) * 2; // -1 to 1
-      const intensity = velocity * randomFactor;
-      displacementMap[sliceIndex] += intensity;
-    }
+    const randomFactor = (Math.random() - 0.5) * 2; // -1 to 1
+    const intensity = velocity * randomFactor;
+    displacementMap[sliceIndex] += intensity;
+  }
 }
 
 function decayDisplacement(displacementMap) {
@@ -113,14 +113,18 @@ function decayDisplacement(displacementMap) {
 }
 
 function drawTears(state) {
-  for (let sliceIndex = 0; sliceIndex < state.displacementMap.length; sliceIndex++) {
+  for (
+    let sliceIndex = 0;
+    sliceIndex < state.displacementMap.length;
+    sliceIndex++
+  ) {
     const displacement = state.displacementMap[sliceIndex];
     const { threshold, opacity } = getTearIntensity(state.velocity);
     const { red, green, blue } = getTearColour(displacement);
-  if (Math.abs(displacement) > threshold) {
-    const dy = sliceIndex * state.sliceHeight + displacement;  
-    state.ctx.fillStyle = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
-    state.ctx.fillRect(0, dy, canvas.width, state.sliceHeight);
+    if (Math.abs(displacement) > threshold) {
+      const dy = sliceIndex * state.sliceHeight + displacement;
+      state.ctx.fillStyle = `rgba(${red}, ${green}, ${blue}, ${opacity})`;
+      state.ctx.fillRect(0, dy, canvas.width, state.sliceHeight);
     }
   }
 }
@@ -131,15 +135,15 @@ function getTearIntensity(velocity) {
   const opacity = Math.min(0.5, velocityMagnitude * 0.3);
   return {
     threshold,
-    opacity
-  }  
+    opacity,
+  };
 }
 
 function getTearColour(displacement) {
   const red = Math.max(0, displacement * 10);
   const blue = Math.max(0, -displacement * 10);
   const green = 20;
-  return { red, green, blue };    
+  return { red, green, blue };
 }
 
 export function initVhsOverlay() {
@@ -150,4 +154,3 @@ export function initVhsOverlay() {
     drawFrame();
   });
 }
-

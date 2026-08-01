@@ -10,17 +10,14 @@
 
   </head>
   <body>
-    <canvas id="vhsCanvas"></canvas>
+    <canvas id="vhs-canvas"></canvas>
     <main>
       <section id="landing" class="greeting">
-        <h1 id="glitchHeading" class="greeting-header" data-text="Echoes Detected">
-          <!-- <span id="glitchRed">E</span>
-          <span id="glitchBlue">E</span>
-          <span id="glitchPink">E</span> -->
+        <h1 id="glitch-heading" class="greeting-header" data-text="Echoes Detected">
           Echoes Detected
         </h1>
         <p class="greeting-statement">Awaiting signal transmission</p>
-        <button id="startScan">Initiate Scan</button>
+        <button id="start-scan">Initiate Scan</button>
       </section>
 
       <header id="page-top" class="header hidden">
@@ -93,48 +90,8 @@
           <option value="track-7">Track 7</option>
           </select>
 
-
-          <label for="feeling">What inner feeling was dominant whilst listening to the track?</label>
-          <select id="feeling" name="dominant-feeling">
-          <option value="hopelessness">Hopelessness</option>
-          <option value="grief">Grief</option>
-          <option value="loneliness">Loneliness</option>
-          <option value="desperation">Desperation</option>
-          <option value="clarity">Clarity</option>
-          <option value="growth">Growth</option>
-          </select>
-
           <label id="number-label" for="number">On a scale of 1-10, how loud did you play the track?</label>
           <input type="number" id="number" name="volume-level" min="1" max="10" placeholder="7">
-
-          <!-- paragraph element for screen readers only -->
-          <p id="disconnect-desc" class="visually-hidden">
-            This question explores emotional disconnection. 
-            Sharing your experience helps deepen the EP's themes and human resonance.
-          </p>
-
-          <label for="disconnect">Have you ever felt disconnected from who you really are?</label>
-          <textarea
-            id="disconnect"
-            name="user-disconnection"
-            rows="4"
-            aria-describedby="disconnect-desc"
-            placeholder="It is not too late to (re)create yourself. Tell me your experience with inner disconnection"></textarea>
-
-          <fieldset>
-          <legend class="visually-hidden">Live show attendance</legend>
-          <h2 id="attendance-options">Would you come see me play my EP live?</h2>
-          <div role="radiogroup" aria-labelledby="attendance-options">
-            <div class="form-option">
-              <input type="radio" name="gig-attendance" id="yes" value="yes">
-              <label for="yes">Yes</label>
-            </div>
-            <div class="form-option">
-              <input type="radio" name="gig-attendance" id="no" value="no">
-              <label for="no">No</label>
-            </div>
-          </div>
-          </fieldset>
 
           <fieldset>
             <legend class="visually-hidden">Gig city preference</legend>
@@ -174,7 +131,6 @@
             </div>
           </fieldset>
 
-
           <button type="submit" id="submit" aria-label="Submit your emotional reflection">Send Reflection</button>
         </form>
 
@@ -183,7 +139,7 @@
         </div>
       </section>  
 
-      <button id="safeModeToggle" aria-label="Toggle Safe Mode to reduce motion"></button>
+      <button id="safe-mode-toggle" aria-label="Toggle safe mode to reduce motion"></button>
       <script type="module" src="/JS/main.js"></script>
     </main>
   </body>

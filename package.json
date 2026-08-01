@@ -6,6 +6,11 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
+    "lint:js": "eslint .",
+    "lint:css": "stylelint \"public/**/*.css\"",
+    "lint:html": "htmlhint \"public/**/*.html\"",
+    "lint": "pnpm lint:js && pnpm lint:css && pnpm lint:html",
+    "lint:fix": "eslint . --fix && stylelint \"public/**/*.css\" --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,5 +26,15 @@
   "type": "module",
   "dependencies": {
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.8.0",
+    "htmlhint": "^1.9.2",
+    "prettier": "^3.9.6",
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard": "^40.0.0"
   }
 }
