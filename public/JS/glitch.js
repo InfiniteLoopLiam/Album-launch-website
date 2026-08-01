@@ -1,14 +1,14 @@
 // awesome script of glitchy glitches
 
-import { isSafeModeOn } from "./utils.js";
+import { isSafeModeOn } from './utils.js';
 
-const glitchHeading = document.getElementById('glitchHeading');
+const glitchHeading = document.getElementById('glitch-heading');
 
 export function initGlitch() {
   if (isSafeModeOn()) return;
 
   setInterval(() => {
-    randomGlitch()
+    randomGlitch();
   }, 90);
 
   setTimeout(runFlickerLoop, scheduleFlicker());
@@ -18,20 +18,20 @@ export function initGlitch() {
 
 function runFlickerLoop() {
   if (isSafeModeOn()) return;
-  
+
   const randomNum = Math.random();
- 
+
   if (randomNum >= 0.5 && randomNum < 0.75) {
     applyFlickerEffect('forward');
   } else if (randomNum >= 0.75) {
     applyFlickerEffect('reverse');
-  } 
+  }
 
   setTimeout(runFlickerLoop, scheduleFlicker());
 }
 
 function scheduleFlicker() {
-  return 1000 + Math.random() * 1500
+  return 1000 + Math.random() * 1500;
 }
 
 function applyFlickerEffect(direction) {
@@ -49,21 +49,20 @@ function randomGlitch() {
 
 // section for infected and mutated text
 
-const originalHeader = glitchHeading.innerText.split("");
+const originalHeader = glitchHeading.innerText.split('');
 
-const infectedChars = originalHeader.map(char => ({
+const infectedChars = originalHeader.map((char) => ({
   original: char,
   current: char,
-  state: "healthy"
+  state: 'healthy',
 }));
-
 
 function infect(index) {
   if (index < 0 || index >= infectedChars.length) return;
 
   const char = infectedChars[index];
-  if (char.state === "healthy") {
-    char.state = "infected";
+  if (char.state === 'healthy') {
+    char.state = 'infected';
     char.current = mutateChar();
     renderInfectedText();
   }
@@ -75,11 +74,13 @@ function mutateChar() {
 }
 
 function renderInfectedText() {
-  const infectedHTML = infectedChars.map(newChar => {
-    return `<span class="glitch-char ${newChar.state}">${newChar.current}</span>`;
-  }).join('');
+  const infectedHTML = infectedChars
+    .map((newChar) => {
+      return `<span class="glitch-char ${newChar.state}">${newChar.current}</span>`;
+    })
+    .join('');
   glitchHeading.innerHTML = infectedHTML;
-} 
+}
 
 function infectRandomly() {
   const index = Math.floor(Math.random() * infectedChars.length);
