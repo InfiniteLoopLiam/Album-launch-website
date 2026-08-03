@@ -74,12 +74,11 @@ function mutateChar() {
 }
 
 function renderInfectedText() {
-  const infectedHTML = infectedChars
+  glitchHeading.innerHTML = infectedChars
     .map((newChar) => {
       return `<span class="glitch-char ${newChar.state}">${newChar.current}</span>`;
     })
     .join('');
-  glitchHeading.innerHTML = infectedHTML;
 }
 
 function infectRandomly() {

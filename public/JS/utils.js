@@ -23,6 +23,7 @@ export function isSafeModeOn() {
 }
 
 export function updateButtonLabel() {
-  const label = isSafeModeOn() ? 'Disable Safe Mode' : 'Enable Safe Mode';
-  accessibilityToggleBtn.textContent = label;
+  accessibilityToggleBtn.textContent = isSafeModeOn()
+    ? 'Disable Safe Mode'
+    : 'Enable Safe Mode';
 }
